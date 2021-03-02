@@ -7,13 +7,13 @@ interface Props {}
 
 export class SVGViewer extends React.Component<Props> {
   async reGenerateSvg() {
-    const {fileData} = this.context;
+    const {filteredFileData} = this.context;
     const canvas: HTMLCanvasElement = document.getElementById('svgPreview') as HTMLCanvasElement;
 
-    if (canvas && fileData) {
+    if (canvas && filteredFileData) {
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        const v = await Canvg.from(ctx, fileData);
+        const v = await Canvg.from(ctx, filteredFileData);
         v.start();
       }
     }

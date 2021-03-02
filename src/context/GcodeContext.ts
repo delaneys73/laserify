@@ -7,6 +7,7 @@ export interface SVGLayer {
 
 export interface GcodeContextValue {
   fileData: string;
+  filteredFileData: string;
   layers: SVGLayer[];
   currentGcode: string;
   currentLayer: string;
@@ -16,10 +17,12 @@ export interface GcodeContextValue {
   setGcode: (data: string) => void;
   setLayers: (data: SVGLayer[]) => void;
   setCurrentLayer: (data: string) => void;
+  update: (changes: any) => void;
 }
 
 export const initial: GcodeContextValue = {
   fileData: '',
+  filteredFileData: '',
   layers: [],
   currentGcode: '',
   currentLayer: '',
@@ -29,6 +32,7 @@ export const initial: GcodeContextValue = {
   setGcode: () => {},
   setLayers: () => {},
   setCurrentLayer: () => {},
+  update: () => {},
 }
 
 export const GcodeContext = React.createContext(initial);

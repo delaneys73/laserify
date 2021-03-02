@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {FormControl, InputLabel, Select, MenuItem, FormHelperText} from '@material-ui/core';
+import LayersIcon from '@material-ui/icons/Layers';
 import { GcodeContext, SVGLayer } from '../context/GcodeContext';
+import './LayerSelector.css';
 
 interface Props {
   onChange: (newValue: string) => void;
@@ -15,25 +16,15 @@ export class LayerSelector extends React.Component<Props> {
     const {onChange} = this.props;
     return (
       <>
-        <FormControl>
-          <InputLabel shrink id="layer-label">
-            Layer
-          </InputLabel>
-          <Select
-            id="layer"
-            value={currentLayer}
-            onChange={(e) => onChange(e.target.name || '')}
-            displayEmpty
-          >
-            {layers.map((layer, index) => (
-              <MenuItem key={index} value={layer.id}>
-              <em>{layer.name}</em>
-              </MenuItem>
-            ))
-            }
-          </Select>
-          <FormHelperText>Select layer to work with</FormHelperText>
-        </FormControl>
+        <div className='layerSelector'>
+          <LayersIcon />
+          <select id='layers' onChange={(e) => onChange(e.target.value)}>
+          {layers.map((layer, index) => (
+            <option key={index} value={layer.id}>{layer.name}</option>
+          ))
+          }
+          </select>
+        </div>
       </>
     )
   }

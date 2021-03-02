@@ -1,0 +1,12 @@
+.layerSelector {
+  display: flex;
+  align-items: center;
+  margin-right: 10px
+}
+
+.layerSelector #layers {
+  min-width: 125px;
+  max-width: 125px;
+  background: none;
+  color: #fff;
+}

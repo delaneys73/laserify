@@ -4,11 +4,6 @@
   flex-grow: 1;
 }
 
-.viewer-outer .viewer-header {
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
 .viewer-outer .gcode {
   flex-grow: 0.2;
   text-align: left;

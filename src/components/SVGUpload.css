@@ -1,0 +1,39 @@
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.fileWrapper > label {
+  color: white;
+  display: inline-block;
+  padding: 4px;
+  min-width: 125px;
+  max-width: 125px;
+  min-height: 20px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileWrapper > label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.fileWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.fileWrapper svg {
+  margin-right: 5px;
+}

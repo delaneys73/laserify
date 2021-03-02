@@ -1,0 +1,7 @@
+.gcodeView {
+  text-align: left;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+}

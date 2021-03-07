@@ -16,7 +16,7 @@ export interface GcodeContextValue {
   setLayers: (data: SVGLayer[]) => void;
   setCurrentLayer: (data: string) => void;
   update: (changes: any) => void;
-  regenerate: (laserMode?: boolean) => void;
+  regenerate: (currentLaserMode: boolean) => void;
 }
 
 export const initial: GcodeContextValue = {

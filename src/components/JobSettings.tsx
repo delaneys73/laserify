@@ -90,7 +90,7 @@ function JobSettings() {
             onChange={(e) => updateSettings({bedHeight: parseFloat(e.target.value)})}
           />
         </FormGroup>
-        <Button color='secondary' onClick={() => regenerate()}>GENERATE</Button>
+        <Button color='secondary' onClick={() => regenerate(laserMode)}>GENERATE</Button>
         <Button color='primary'>DOWNLOAD</Button>
       </Paper>
     </div>

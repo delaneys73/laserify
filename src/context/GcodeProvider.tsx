@@ -21,10 +21,10 @@ function GcodeProvider(props: Props) {
 
   const setLayers = (layers: SVGLayer[]) => setGcodeValue({...gcodeValue, layers})
 
-  const regenerate = async (laserMode?: boolean) => {
+  const regenerate = async (currentLaserMode: boolean) => {
     const {bedWidth, bedHeight} = jobSettings;
     const {currentLayer, fileData} = gcodeValue;
-    const tools = new GCodeTools(bedWidth, bedHeight, currentLayer, {...jobSettings, laserMode: (laserMode===true)});
+    const tools = new GCodeTools(bedWidth, bedHeight, currentLayer, {...jobSettings, laserMode: currentLaserMode});
     const {gcode, layers, selectedLayer} = await tools.processFile(fileData);
     update({
       currentGcode: gcode,

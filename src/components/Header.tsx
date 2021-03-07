@@ -29,7 +29,7 @@ function Header() {
 
   const {update, fileData, currentLayer}  = useContext(GcodeContext);
   const {bedWidth, bedHeight} = useContext(JobContext);
-  
+
   const jobSettings = useContext(JobContext);
   const classes = useStyles();
 
@@ -62,7 +62,7 @@ function Header() {
           </IconButton>
           <div className='title'>
             <AllInclusiveIcon />
-            Laserify
+            CloudGCoder
           </div>
           {fileData && (
             <LayerSelector onChange={(data) => changeLayer(data)}/>

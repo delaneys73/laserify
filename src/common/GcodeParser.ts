@@ -15,6 +15,7 @@ export class GcodeParser {
   private bedHeight: number;
   private fileData: string;
   private jobSettings: JobSettings;
+  private lastPathStart: number = -1;
 
   scaleGCodeCmd(
     width: number,
@@ -45,6 +46,18 @@ export class GcodeParser {
     return `${code} X${x.toFixed(4)} Y${y.toFixed(4)}${zcode}${icode}${jcode}${fcode}`
   }
 
+  repeatPasses() {
+    const {laserMode, passes} = this.jobSettings;
+    if (laserMode && passes > 1 && this.lastPathStart !== -1) {
+      const path = this.lines.slice(this.lastPathStart, this.lines.length);
+      for (let j=0; j < passes-1; j++) {
+        this.lines.push(`; Pass ${j+2}`);  
+        this.lines = this.lines.concat(path);
+      }
+      this.lastPathStart = -1;
+    }
+  }
+
   getGcodeDriver(width: number, height: number) {
     return new GCanvas.GcodeDriver({
       write: (cmd: string) => {
@@ -56,9 +69,11 @@ export class GcodeParser {
 
         if (cutCodes.includes(cmd.substring(0,2)) && lastLine.startsWith('G0')) {
           this.lines.push('M03');  
+          this.lastPathStart = this.lines.length -2;
         }
         if (cmd.startsWith('G0') && cutCodes.includes(lastLine.substring(0,2))) {
           this.lines.push('M05');  
+          this.repeatPasses()
         }
 
         const matches = cmd.match(/^(G\d+) X(.*?) Y(.*?)( Z(.*?))?( I(.*?))?( J(.*?))?( F(.*?))?$/);
@@ -118,6 +133,7 @@ export class GcodeParser {
       });
 
       this.lines.push('M05');
+      this.repeatPasses();
     } catch (err) {
       console.error(err);
     }

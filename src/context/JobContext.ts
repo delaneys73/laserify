@@ -20,7 +20,7 @@ export const initial: JobSettings = {
   materialThickness: 3,
   depthOfCut: 0.5,
   bedWidth: 210,
-  bedHeight: 320,
+  bedHeight: 297,
   updateSettings: () => {},
 };
 

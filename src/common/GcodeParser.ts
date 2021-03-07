@@ -29,13 +29,14 @@ export class GcodeParser {
     fStr?: string,
   ): string {
     const {bedWidth, bedHeight} = this;
-    const ratio  = width / bedWidth;
-    const x = Number.parseFloat(xStr) / ratio;
-    const y = bedHeight - Number.parseFloat(yStr) / ratio;
+    const xRatio  = width / bedWidth;
+    const yRatio  = height / bedHeight;
+    const x = Number.parseFloat(xStr) / xRatio;
+    const y = bedHeight - Number.parseFloat(yStr) / yRatio;
     
     const z = zStr ? Number.parseFloat(zStr) : 0;
-    const i = iStr ? Number.parseFloat(iStr) / ratio : 0;
-    const j = jStr ? Number.parseFloat(jStr) / ratio : 0;
+    const i = iStr ? Number.parseFloat(iStr) / xRatio : 0;
+    const j = jStr ? Number.parseFloat(jStr) / xRatio : 0;
     const f = fStr ? Number.parseFloat(fStr) : 0;
 
     const zcode = zStr ? ` Z${z.toFixed(4)}` : '';

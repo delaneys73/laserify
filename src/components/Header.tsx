@@ -33,8 +33,29 @@ function Header() {
   const jobSettings = useContext(JobContext);
   const classes = useStyles();
 
+  const setDefaultBedSize = (data: string, bedWidth: number, bedHeight: number) => {
+    const parser: DOMParser = new DOMParser();
+    const doc: Document = parser.parseFromString(data, 'image/svg+xml');
+
+    const svg = doc.getElementsByTagName('svg').item(0);
+    const viewbox = svg?.getAttribute('viewBox');
+    if (viewbox) {
+      const {updateSettings} = jobSettings;
+      const bounds = viewbox.split(' ');
+      const w = parseInt(bounds[2], 10);
+      const h = parseInt(bounds[3], 10);
+      updateSettings({bedWidth: w, bedHeight: h});
+      return [w, h];
+    }
+
+    return [bedWidth, bedHeight]
+  }
+
   const processChange = async (data: string) => {
-    const {gcode, layers, selectedLayer} = await new GCodeTools(bedWidth, bedHeight, currentLayer, jobSettings).processFile(data);
+    const [bw, bh] = setDefaultBedSize(data, bedWidth, bedHeight);
+
+    const {gcode, layers, selectedLayer} = await new GCodeTools(bw, bh, currentLayer, jobSettings).processFile(data);
+
     update({
       currentGcode: gcode,
       fileData: data,

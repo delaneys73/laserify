@@ -11,13 +11,12 @@ export interface GcodeContextValue {
   layers: SVGLayer[];
   currentGcode: string;
   currentLayer: string;
-  bedWidth: number;
-  bedHeight: number;
   setFileData: (data: string) => void;
   setGcode: (data: string) => void;
   setLayers: (data: SVGLayer[]) => void;
   setCurrentLayer: (data: string) => void;
   update: (changes: any) => void;
+  regenerate: (laserMode?: boolean) => void;
 }
 
 export const initial: GcodeContextValue = {
@@ -26,13 +25,12 @@ export const initial: GcodeContextValue = {
   layers: [],
   currentGcode: '',
   currentLayer: '',
-  bedWidth: 210,
-  bedHeight: 320,
   setFileData: () => {},
   setGcode: () => {},
   setLayers: () => {},
   setCurrentLayer: () => {},
   update: () => {},
+  regenerate: () => {},
 }
 
 export const GcodeContext = React.createContext(initial);

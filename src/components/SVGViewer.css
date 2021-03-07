@@ -18,4 +18,27 @@
   overflow-y: scroll;
   max-height: 450px;
   border: 1px solid;
+  background-color: grey;
+  position: relative; 
+}
+.viewer-outer .viewport .rulers {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+.viewer-outer .viewport .rulers > canvas {
+  background-color: #fff;
+}
+
+.viewer-outer .viewport .rulers > .bottomRuler {
+  height: 30px;
+}
+
+.viewer-outer .viewport .sideRuler {
+  width: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

@@ -1,17 +1,20 @@
 import GCanvas from 'gcanvas';
 import Canvg from 'canvg';
+import { JobSettings } from '../context/JobContext';
 
 export class GcodeParser {
-  constructor(bedWidth:number, bedHeight: number, fileData: string) {
+  constructor(bedWidth:number, bedHeight: number, fileData: string, jobSettings: JobSettings) {
     this.bedHeight = bedHeight;
     this.bedWidth = bedWidth;
     this.fileData = fileData;
+    this.jobSettings = jobSettings;
   }
   
   public lines: string[] = [];
   private bedWidth: number;
   private bedHeight: number;
   private fileData: string;
+  private jobSettings: JobSettings;
 
   scaleGCodeCmd(
     width: number,
@@ -90,17 +93,23 @@ export class GcodeParser {
   async generate(width: number, height: number) {
     const driver = this.getGcodeDriver(width, height);
     const {fileData} = this;
+    const {toolDiameter, speed, depthOfCut, laserMode, materialThickness} = this.jobSettings;
     this.clearLines();
+
     try {
       const gctx = new GCanvas(driver);
-      /*
-      gctx.depth = 3;
-      gctx.depthOfCut = 0.5;
-      */
+      if (laserMode) {
+        gctx.toolDiameter = 0.1;
+      } else {
+        gctx.depth = materialThickness;
+        gctx.depthOfCut = depthOfCut;
+        gctx.toolDiameter = toolDiameter;
+      }
+      
       gctx.unit ='mm';
-      //gctx.feed = 6;
+      gctx.feed = speed;
       gctx.map('xy-z');
-      gctx.toolDiameter = 0.1;
+      
       const g = await Canvg.from(gctx.canvas.getContext('2d'), fileData);
 
       g.start({

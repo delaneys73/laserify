@@ -12,7 +12,7 @@ export class LayerSelector extends React.Component<Props> {
   static contextType = GcodeContext;
 
   render() {
-    const {layers, currentLayer}: {currentLayer: string, layers: SVGLayer[]} = this.context;
+    const {layers}: {layers: SVGLayer[]} = this.context;
     const {onChange} = this.props;
     return (
       <>

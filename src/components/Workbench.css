@@ -1,0 +1,17 @@
+#workbench {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+#workbench #panels {
+  flex-grow: 1;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+#jobSettings > div {
+  height: 100%;
+  margin: 15px;
+  padding: 10px;
+}

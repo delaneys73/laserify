@@ -1,0 +1,11 @@
+.sliderLabel {
+  transform: scale(0.75) translate(-9px, 1.5px);
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 1rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.00938em;
+}

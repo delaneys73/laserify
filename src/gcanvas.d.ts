@@ -13,5 +13,8 @@ declare module 'gcanvas' {
     public unit: 'mm' | 'inch';
     public map(map: string);
     public toolDiameter: number;
+    public retract: number;
+    public align: 'inner' | 'outer' | 'center';
+    public ramping: boolean;
   }
 };

@@ -9,3 +9,11 @@
   line-height: 1;
   letter-spacing: 0.00938em;
 }
+
+.toggleSwitch, .selectBox > div, .checkLabel span {
+  font-size: 0.75rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.00938em;
+}

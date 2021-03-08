@@ -50,7 +50,7 @@ function WorkBench() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <JobSettings />
+      <JobSettings disabled={!fileData}/>
     </div>
   );
 }
